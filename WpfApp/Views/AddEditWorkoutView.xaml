@@ -1,0 +1,90 @@
+﻿<UserControl x:Class="WpfApp.Views.AddEditWorkoutView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WpfApp.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <DockPanel Margin="16">
+        <TextBlock x:Name="PageTitle" DockPanel.Dock="Top" Text="TODO" FontSize="20" FontWeight="Bold" Margin="0,0,0,12"/>
+
+        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" 
+                    HorizontalAlignment="Right" Margin="0,12,0,0">
+            <Button Content="CANCEL" Click="Cancel_Click" 
+                    Background="#FF6B6B" Foreground="White" Padding="12,6" Margin="4"/>
+            <Button Content="SAVE" Click="Save_Click" 
+                    Background="#333" Foreground="White" Padding="12,6" Margin="4"/>
+        </StackPanel>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- LINKS: Exercise Auswahl + Sets -->
+            <DockPanel Grid.Column="0" Margin="0,0,16,0">
+                <!-- Exercise Dropdown + Add -->
+                <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,12">
+                    <StackPanel>
+                        <TextBlock Text="Exercise" FontSize="12"/>
+                        <ComboBox x:Name="ExerciseComboBox" Width="200"
+                                  DisplayMemberPath="Name"/>
+                    </StackPanel>
+                    <Button Content="Add" Click="AddExercise_Click" 
+                            Padding="12,4" Margin="8,14,0,0"/>
+                </StackPanel>
+
+                <!-- Scrollbare Liste der hinzugefügten Exercises -->
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <ItemsControl x:Name="ExercisesList">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Margin="0,0,0,16">
+                                    <!-- Exercise Name + Remove -->
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding ExerciseName}" 
+                                                   FontWeight="Bold" FontSize="14"/>
+                                        <Button Content="✕" Margin="8,0,0,0"
+                                                Click="RemoveExercise_Click"
+                                                Tag="{Binding ExerciseId}"/>
+                                    </StackPanel>
+                                    <!-- Sets Tabelle -->
+                                    <DataGrid ItemsSource="{Binding Sets}"
+                                              AutoGenerateColumns="False"
+                                              CanUserAddRows="True"
+                                              CellEditEnding="DataGrid_CellEditEnding"
+                                              HeadersVisibility="Column">
+                                        <DataGrid.Columns>
+                                            <DataGridTextColumn Header="Set" 
+                                                Binding="{Binding SetNumber}" IsReadOnly="True"/>
+                                            <DataGridTextColumn Header="kg" 
+                                                Binding="{Binding Weight, Mode=TwoWay}"/>
+                                            <DataGridTextColumn Header="Reps" 
+                                                Binding="{Binding Reps, Mode=TwoWay}"/>
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </DockPanel>
+
+            <!-- RECHTS: Workout Details -->
+            <StackPanel Grid.Column="1">
+                <TextBlock Text="Workout name" FontSize="12"/>
+                <TextBox x:Name="WorkoutNameBox" Margin="0,0,0,12"/>
+
+                <TextBlock Text="Start" FontSize="12"/>
+                <DatePicker x:Name="StartDatePicker" Margin="0,0,0,4"/>
+                <TextBox x:Name="StartTimeBox" Text="10:00" Margin="0,0,0,12"/>
+
+                <TextBlock Text="End" FontSize="12"/>
+                <DatePicker x:Name="EndDatePicker" Margin="0,0,0,4"/>
+                <TextBox x:Name="EndTimeBox" Text="11:00"/>
+            </StackPanel>
+        </Grid>
+    </DockPanel>
+</UserControl>

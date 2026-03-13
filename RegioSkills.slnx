@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="WpfApp/WpfApp.csproj" />
+  <Project Path="Database/Database.csproj" />
+</Solution>

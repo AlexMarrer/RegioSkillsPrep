@@ -1,0 +1,21 @@
+﻿<Window x:Class="WpfApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Background="#F0F0F0">
+            <Button x:Name="BackButton" Content="Back" Click="Back_Click" Padding="8.4" Margin="4" Visibility="Collapsed"/>
+
+            <StackPanel x:Name="NavButtons" Orientation="Horizontal">
+                <Button Content="Exercises" Click="Exercises_Click" Padding="8,4" Margin="4"/>
+                <Button Content="Templates" Click="Templates_Click" Padding="8,4" Margin="4"/>
+            </StackPanel>
+        </StackPanel>
+
+        <ContentControl x:Name="MainContent"/>
+    </DockPanel>
+</Window>
